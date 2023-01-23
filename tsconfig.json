@@ -27,7 +27,7 @@
     },
     "outDir": "./dist"
   },
-  "include": ["bin", "src", "package.json", "tsconfig.json", "handleFile.ts"],
+  "include": ["bin", "src", "package.json", "tsconfig.json"],
   "exclude": ["dist", "node_modules"],
   // 使用ts-node的一些配置
   "ts-node": {

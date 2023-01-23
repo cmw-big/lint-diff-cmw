@@ -1,6 +1,6 @@
 {
     "name": "lint-diff-cmw",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "ESLint change diff",
     "main": "./dist/index.js",
     "types": "./dist/src/index.d.ts",
@@ -13,13 +13,14 @@
         "LICENSE",
         "README.md",
         "dist/bin",
-        "dist/src"
+        "dist/src",
+        "package.json"
     ],
     "bin": {
         "lint-diff": "./dist/bin/index.js"
     },
     "scripts": {
-        "tsc": "npx tsc && npx ts-node ./handleFile.ts"
+        "tsc": "npx tsc && npx ts-node ./src/handleFile.ts"
     },
     "keywords": [
         "eslint",

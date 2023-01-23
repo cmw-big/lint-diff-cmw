@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node --skipIgnore
+#!/usr/bin/env ts-node
 
 import { program } from 'commander';
 import { argv } from 'node:process';

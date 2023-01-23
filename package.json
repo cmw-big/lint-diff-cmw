@@ -1,5 +1,5 @@
 {
-  "name": "eslint-diff-cmw",
+  "name": "lint-diff-cmw",
   "version": "0.0.1",
   "description": "ESLint change diff",
   "main": "./src/index.ts",

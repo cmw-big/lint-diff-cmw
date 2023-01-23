@@ -1,9 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 import { program } from 'commander';
 import { argv } from 'node:process';
 import { handleES } from '../src'
-program.version('0.01').description('lint diff code by cli');
+import packageJson from '../package.json'
+program.version(packageJson.version).description('lint diff code by cli');
 
 program
   .command('es')

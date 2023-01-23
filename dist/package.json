@@ -1,0 +1,49 @@
+{
+    "name": "lint-diff-cmw",
+    "version": "0.0.4",
+    "description": "ESLint change diff",
+    "main": "./dist/index.js",
+    "types": "./dist/src/index.d.ts",
+    "exports": {
+        ".": "./dist/index.js",
+        "./utils": "./dist/utils/index.js",
+        "./handle": "./dist/handle/index.js"
+    },
+    "files": [
+        "LICENSE",
+        "README.md",
+        "dist/bin",
+        "dist/src"
+    ],
+    "bin": {
+        "lint-diff": "./dist/bin/index.js"
+    },
+    "scripts": {
+        "tsc": "npx tsc && npx ts-node ./handleFile.ts"
+    },
+    "keywords": [
+        "eslint",
+        "git",
+        "git diff"
+    ],
+    "author": "cmw",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:cmw-big/lint-diff-cmw.git"
+    },
+    "peerDependencies": {
+        "eslint": "*",
+        "typescript": "*"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.18",
+        "eslint": "^8.32.0",
+        "typescript": "^4.9.4"
+    },
+    "dependencies": {
+        "commander": "^10.0.0",
+        "ts-node": "^10.9.1",
+        "tslib": "^2.4.1"
+    }
+}

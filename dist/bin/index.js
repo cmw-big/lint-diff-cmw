@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 const commander_1 = require("commander");
 const node_process_1 = require("node:process");
 const src_1 = require("../src");
-commander_1.program.version('0.01').description('lint diff code by cli');
+const package_json_1 = tslib_1.__importDefault(require("../package.json"));
+commander_1.program.version(package_json_1.default.version).description('lint diff code by cli');
 commander_1.program
     .command('es')
     .description(` lint js or ts by eslint`)

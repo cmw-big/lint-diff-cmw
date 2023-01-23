@@ -9,5 +9,5 @@ tslib_1.__exportStar(require("./handle"), exports);
  */
 /**
  * TODO 待完成ts的类型检测对应的diff文件
- */
+ */ 
 //# sourceMappingURL=index.js.map

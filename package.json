@@ -12,12 +12,15 @@
   "files": [
     "LICENSE",
     "README.md",
-    "dist/**"
+    "dist/bin",
+    "dist/src"
   ],
   "bin": {
     "lint-diff": "./dist/bin/index.js"
   },
-  "scripts": {},
+  "scripts": {
+    "tsc": "npx tsc && npx ts-node ./handleFile.ts"
+  },
   "keywords": [
     "eslint",
     "git",

@@ -1,6 +1,6 @@
 {
   "name": "lint-diff-cmw",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ESLint change diff",
   "main": "./dist/index.js",
   "types": "./dist/src/index.d.ts",

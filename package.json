@@ -2,11 +2,11 @@
   "name": "lint-diff-cmw",
   "version": "0.0.3",
   "description": "ESLint change diff",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "exports": {
-    ".": "./src/index.ts",
-    "./utils": "./src/utils/index.ts",
-    "./handle": "./src/handle/index.ts"
+    ".": "./dist/index.js",
+    "./utils": "./dist/utils/index.js",
+    "./handle": "./dist/handle/index.js"
   },
   "files": [
     "LICENSE",
@@ -15,7 +15,7 @@
     "src/**"
   ],
   "bin": {
-    "lint-diff": "./bin/index.ts"
+    "lint-diff": "./dist/bin/index.js"
   },
   "scripts": {},
   "keywords": [

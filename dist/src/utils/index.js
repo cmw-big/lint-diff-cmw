@@ -7,9 +7,9 @@ const node_path_1 = require("node:path");
 /**
  * 找到想要的后缀所有的git diff的文件
  */
-function diffAllFileList(extList) {
+function diffAllFileList(branchName = 'master', extList) {
     try {
-        const res = (0, node_child_process_1.execSync)('git rev-parse master && git rev-parse HEAD').toString();
+        const res = (0, node_child_process_1.execSync)(`git rev-parse ${branchName} && git rev-parse HEAD`).toString();
         const diffList = res.split(node_os_1.EOL).filter(Boolean);
         if (diffList.length <= 1) {
             return [];

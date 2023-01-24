@@ -20,7 +20,7 @@ function eslintFileList(fileList, options) {
             }
             const formatter = await eslint.loadFormatter('stylish');
             const resultText = formatter.format(results);
-            console.log(resultText);
+            resultText && console.log(resultText);
         }
         catch (error) {
             process.exitCode = 1;

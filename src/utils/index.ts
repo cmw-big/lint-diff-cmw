@@ -5,10 +5,10 @@ import { extname } from "node:path";
 /**
  * 找到想要的后缀所有的git diff的文件
  */
-export function diffAllFileList(extList?: string[]) {
+export function diffAllFileList(branchName = 'master', extList?: string[]) {
     try {
       const res = execSync(
-        'git rev-parse master && git rev-parse HEAD',
+        `git rev-parse ${branchName} && git rev-parse HEAD`,
       ).toString();
 
       const diffList = res.split(EOL).filter(Boolean);

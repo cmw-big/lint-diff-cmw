@@ -10,10 +10,13 @@ commander_1.program.version(package_json_1.default.version).description('lint di
 commander_1.program
     .command('es')
     .option('--fix', 'eslint autofix')
+    .option('-b --branch [branchName]', 'diff [branchName] width current branch')
     .description(` lint js or ts by eslint`)
     .action((options) => {
+    console.log(options);
     (0, src_1.handleES)({
         fix: Boolean(options.fix),
+        branchName: String(options.branchName),
     });
 });
 commander_1.program.parse(node_process_1.argv);

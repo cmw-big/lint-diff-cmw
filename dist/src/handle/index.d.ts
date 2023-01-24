@@ -1,2 +1,5 @@
 import { type ESLint } from 'eslint';
-export declare function handleES(options?: ESLint.Options): void;
+export interface HandleESParams extends ESLint.Options {
+    branchName?: string;
+}
+export declare function handleES(options?: HandleESParams): void;

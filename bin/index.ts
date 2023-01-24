@@ -9,10 +9,12 @@ program.version(packageJson.version).description('lint diff code by cli');
 program
   .command('es')
   .option('--fix', 'eslint autofix')
+  .option('-b --branch [branchName]', 'diff [branchName] width current branch')
   .description(` lint js or ts by eslint`)
   .action((options) => {
     handleES({
       fix: Boolean(options.fix),
+      branchName: String(options.branch),
     });
   });
 

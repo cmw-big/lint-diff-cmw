@@ -1,23 +1,26 @@
-import { type SpawnSyncReturns, execSync } from 'node:child_process';
-import { cwd } from 'node:process';
-
+import { ESLint } from 'eslint';
 /**
  * 使用eslint的规则
  */
-export function eslintFileList(fileList?: string[]) {
+export function eslintFileList(fileList?: string[], options?: ESLint.Options) {
   if (!fileList?.length) {
     return;
   }
   console.log('eslint start...');
   console.time('eslint time');
-  fileList?.forEach((file) => {
+  const eslint = new ESLint(options);
+  fileList?.forEach(async (file) => {
     try {
-      const eslintRes = execSync(`pnpm exec eslint --color ${file}`, {
-        cwd: cwd(),
-      }).toString();
-      console.log(eslintRes);
+      const results = await eslint.lintFiles(file);
+      if (options?.fix) {
+        await ESLint.outputFixes(results);
+      }
+      const formatter = await eslint.loadFormatter('stylish');
+      const resultText = formatter.format(results);
+      console.log(resultText);
     } catch (error: unknown) {
-      console.log((error as SpawnSyncReturns<Buffer>).stdout.toString());
+      process.exitCode = 1;
+      console.error(error);
     }
   });
   console.timeEnd('eslint time');

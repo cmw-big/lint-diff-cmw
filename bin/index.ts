@@ -12,7 +12,6 @@ program
   .option('-b --branch [branchName]', 'diff [branchName] width current branch')
   .description(` lint js or ts by eslint`)
   .action((options) => {
-    console.log(String(options.branch))
     handleES({
       fix: Boolean(options.fix),
       branchName: String(options.branch),

@@ -5,16 +5,16 @@ const eslint_1 = require("eslint");
 /**
  * 使用eslint的规则
  */
-function eslintFileList(fileList, options) {
+async function eslintFileList(fileList, options) {
     if (!fileList?.length) {
         return;
     }
     console.log('eslint start...');
     console.time('eslint time');
     const eslint = new eslint_1.ESLint(options);
-    fileList?.forEach(async (file) => {
+    for (let i = 0; i < fileList.length; i++) {
         try {
-            const results = await eslint.lintFiles(file);
+            const results = await eslint.lintFiles(fileList[i]);
             if (options?.fix) {
                 await eslint_1.ESLint.outputFixes(results);
             }
@@ -26,7 +26,7 @@ function eslintFileList(fileList, options) {
             process.exitCode = 1;
             console.error(error);
         }
-    });
+    }
     console.timeEnd('eslint time');
     console.log('eslint end...');
 }

@@ -6,8 +6,10 @@ export interface HandleESParams extends ESLint.Options {
   branchName?: string;
 }
 export function handleES(options?: HandleESParams) {
+  const { branchName } = options ?? {};
+  delete options?.branchName
   eslintFileList(
-    diffAllFileList(options?.branchName, ['.ts', '.js', '.tsx', '.jsx']),
+    diffAllFileList(branchName, ['.ts', '.js', '.tsx', '.jsx']),
     options,
   );
 }

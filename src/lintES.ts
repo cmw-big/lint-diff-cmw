@@ -17,7 +17,7 @@ export function eslintFileList(fileList?: string[], options?: ESLint.Options) {
       }
       const formatter = await eslint.loadFormatter('stylish');
       const resultText = formatter.format(results);
-      console.log(resultText);
+      resultText && console.log(resultText);
     } catch (error: unknown) {
       process.exitCode = 1;
       console.error(error);

@@ -1,5 +1,5 @@
 import { type ESLint } from 'eslint';
-import { eslintFileList } from '../lintES';
+import { eslintFileList } from './lintES';
 import { diffAllFileList } from '../utils';
 
 export interface HandleESParams extends ESLint.Options {

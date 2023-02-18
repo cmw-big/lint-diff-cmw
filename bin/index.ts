@@ -1,8 +1,8 @@
 #!/usr/bin/env ts-node
 
+import { handleES } from '@/index';
 import { program } from 'commander';
 import { argv } from 'node:process';
-import { handleES } from '../src';
 import packageJson from '../package.json';
 program.version(packageJson.version).description('lint diff code by cli');
 

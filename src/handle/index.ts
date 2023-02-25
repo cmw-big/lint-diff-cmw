@@ -31,3 +31,5 @@ export function handleTS(options?: HandleTSParams) {
   const { branchName } = options ?? {};
   typeCheck(diffAllFileList(branchName, ['.ts', '.js', '.tsx', '.jsx']));
 }
+
+const a:number =""

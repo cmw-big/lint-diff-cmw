@@ -9,7 +9,7 @@ import stripJsonComments from 'strip-json-comments';
 export const typeCheck = (fileList?: string[], options?: any) => {
   const tsconfig = readFileSync(resolve(cwd(), 'tsconfig.json'), 'utf-8');
   const jsonTsconfig = JSON.parse(stripJsonComments(tsconfig));
-
+  console.log(fileList);
   fileList?.forEach((file) => {
     // 开始进行文件的类型检查
     try {

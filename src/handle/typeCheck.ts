@@ -27,6 +27,8 @@ export const typeCheck = (fileList?: string[], options?: any) => {
       noEmit: true,
       incremental: false,
       composite: false,
+      include: jsonTsconfig?.include,
+      exclude: jsonTsconfig?.exclude,
     } || {
       noEmit: true,
       incremental: false,

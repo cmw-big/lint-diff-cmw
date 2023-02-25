@@ -7,7 +7,10 @@ import { cwd } from 'node:process';
 import stripJsonComments from 'strip-json-comments';
 import ts from 'typescript';
 export const typeCheck = (fileList?: string[], options?: any) => {
+  console.log("TypeScript compilation start... (It's a little slow)");
+  console.time('TypeScript compilation time:');
   if (fileList?.length === 0) {
+    console.timeEnd('TypeScript compilation time:');
     return;
   }
   let tsconfig = '';
@@ -33,6 +36,7 @@ export const typeCheck = (fileList?: string[], options?: any) => {
   if (errors.length) {
     console.error("Error: Couldn't parse compiler options");
     console.error(errors);
+    console.timeEnd('TypeScript compilation time:');
     return;
   }
   const program = ts.createProgram({
@@ -60,10 +64,12 @@ export const typeCheck = (fileList?: string[], options?: any) => {
     `Found ${allDiagnostics?.length} errors in ${fileList?.length} diff files.`,
   );
   if (emitResult.emitSkipped) {
+    console.timeEnd('TypeScript compilation time:');
     throw new Error(message);
   } else if (allDiagnostics.length > 0) {
     process.exit(1);
   } else {
     console.log('TypeScript compilation successful!');
   }
+  console.timeEnd('TypeScript compilation time:');
 };

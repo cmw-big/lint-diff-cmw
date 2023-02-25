@@ -34,26 +34,26 @@ const typeCheck = (fileList, options) => {
     });
     // 创建输出结果
     const emitResult = program.emit();
-    console.log(emitResult, 'result');
     // 表示是否有错误发生，没有生成js代码
+    const allDiagnostics = typescript_1.default
+        .getPreEmitDiagnostics(program)
+        .concat(emitResult.diagnostics);
+    allDiagnostics.forEach((diagnostic) => {
+        if (diagnostic.file) {
+            const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+            const message = typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+            console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+        }
+        else {
+            console.log(typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
+        }
+    });
     if (emitResult.emitSkipped) {
-        const allDiagnostics = typescript_1.default
-            .getPreEmitDiagnostics(program)
-            .concat(emitResult.diagnostics);
-        allDiagnostics.forEach((diagnostic) => {
-            if (diagnostic.file) {
-                const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
-                const message = typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-                console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-            }
-            else {
-                console.log(typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
-            }
-        });
-        let exitCode = emitResult.emitSkipped ? 1 : 0;
-        console.log(`Process exiting with code '${exitCode}'.`);
-        process.exit(exitCode);
+        throw new Error('TypeScript compilation failed');
     }
+    let exitCode = emitResult.emitSkipped ? 1 : 0;
+    console.log(`Process exiting with code '${exitCode}'.`);
+    process.exit(exitCode);
 };
 exports.typeCheck = typeCheck;
 //# sourceMappingURL=typeCheck.js.map

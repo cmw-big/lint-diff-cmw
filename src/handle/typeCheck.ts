@@ -7,6 +7,9 @@ import { cwd } from 'node:process';
 import stripJsonComments from 'strip-json-comments';
 import ts from 'typescript';
 export const typeCheck = (fileList?: string[], options?: any) => {
+  if (fileList?.length === 0) {
+    return;
+  }
   let tsconfig = '';
   try {
     tsconfig = readFileSync(resolve(cwd(), 'tsconfig.json'), 'utf-8');

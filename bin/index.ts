@@ -25,7 +25,7 @@ program
     const { branch } = program.opts();
     handleES({
       fix: Boolean(options.fix),
-      branchName: String(branch),
+      branchName: String(branch) || undefined,
     });
   });
 
@@ -38,7 +38,7 @@ program
   .action((options) => {
     const { branch } = program.opts();
     handleTS({
-      branchName: String(branch),
+      branchName: String(branch) || undefined,
     });
   });
 

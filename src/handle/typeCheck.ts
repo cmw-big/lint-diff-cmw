@@ -16,8 +16,14 @@ export const typeCheck = (fileList?: string[], options?: any) => {
   const jsonTsconfig = JSON.parse(stripJsonComments(tsconfig));
   // 将tsconfig转化为createProgram需要的
   const { options: programOptions, errors } = ts.convertCompilerOptionsFromJson(
-    { ...(jsonTsconfig.compilerOptions ?? {}), noEmit: true } || {
+    {
+      ...(jsonTsconfig.compilerOptions ?? {}),
       noEmit: true,
+      incremental: false,
+      composite: false,
+    } || {
+      noEmit: true,
+      incremental: false,
     },
     process.cwd(),
   );
@@ -47,7 +53,9 @@ export const typeCheck = (fileList?: string[], options?: any) => {
     formatHost,
   );
   console.error(message);
-  console.log(`Found ${allDiagnostics?.length} errors in ${fileList?.length} files.`);
+  console.log(
+    `Found ${allDiagnostics?.length} errors in ${fileList?.length} files.`,
+  );
   if (emitResult.emitSkipped) {
     throw new Error(message);
   } else if (allDiagnostics.length > 0) {

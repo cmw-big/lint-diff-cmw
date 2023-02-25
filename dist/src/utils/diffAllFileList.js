@@ -15,7 +15,7 @@ function diffAllFileList(branchName = 'master', extList) {
             return [];
         }
         // 比较当前已经暂存但尚未提交的更改。
-        const diffFileListStr = (0, node_child_process_1.execSync)(`git diff ${diffList[0]} ${diffList[1]} --name-only`).toString();
+        const diffFileListStr = (0, node_child_process_1.execSync)(`git diff ${diffList[0]} ${diffList[1]} --name-only --diff-filter=ACMRT`).toString();
         const diffFileList = diffFileListStr.split(node_os_1.EOL).filter(Boolean);
         if (!extList?.length) {
             return diffFileList;

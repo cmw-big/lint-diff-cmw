@@ -5,5 +5,4 @@ tslib_1.__exportStar(require("./handle"), exports);
 /**
  * TODO 待完善css，scss，less等样式规则使用stylelint的检测
  */
-const a = "22";
 //# sourceMappingURL=index.js.map

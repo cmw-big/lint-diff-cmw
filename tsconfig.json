@@ -22,9 +22,6 @@
     "resolveJsonModule": true, // 可以解析json导入json文件
     "useDefineForClassFields": true,
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "outDir": "./dist"
   },
   "include": ["bin", "src", "package.json", "tsconfig.json"],

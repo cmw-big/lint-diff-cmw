@@ -22,9 +22,6 @@
         "resolveJsonModule": true,
         "useDefineForClassFields": true,
         "baseUrl": "./",
-        "paths": {
-            "@/*": ["./src/*"]
-        },
         "outDir": "./dist"
     },
     "include": ["bin", "src", "package.json", "tsconfig.json"],

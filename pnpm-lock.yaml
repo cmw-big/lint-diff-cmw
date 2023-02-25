@@ -5,12 +5,14 @@ specifiers:
   '@types/node': ^18.14.1
   commander: ^10.0.0
   eslint: ^8.34.0
+  strip-json-comments: ^3.1.1
   ts-node: ^10.9.1
   tslib: ^2.5.0
   typescript: ^4.9.5
 
 dependencies:
   commander: 10.0.0
+  strip-json-comments: 3.1.1
   tslib: 2.5.0
 
 devDependencies:
@@ -692,7 +694,6 @@ packages:
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-    dev: true
 
   /supports-color/7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}

@@ -18,10 +18,9 @@ const typeCheck = (fileList, options) => {
         try {
             // 读取 TypeScript 代码
             const code = (0, node_fs_1.readFileSync)(`${file}`, 'utf-8');
-            const result = typescript_1.default.transpileModule(code, {
+            typescript_1.default.transpileModule(code, {
                 compilerOptions: jsonTsconfig.compilerOptions,
             });
-            // console.log(result);
         }
         catch (error) {
             console.log(error, 'error');

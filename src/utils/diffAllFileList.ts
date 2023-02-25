@@ -16,7 +16,7 @@ export function diffAllFileList(branchName = 'master', extList?: string[]) {
     }
     // 比较当前已经暂存但尚未提交的更改。
     const diffFileListStr = execSync(
-      `git diff ${diffList[0]} ${diffList[1]} --name-only`,
+      `git diff ${diffList[0]} ${diffList[1]} --name-only --diff-filter=ACMRT`,
     ).toString();
     const diffFileList = diffFileListStr.split(EOL).filter(Boolean);
     if (!extList?.length) {

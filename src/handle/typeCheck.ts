@@ -54,7 +54,7 @@ export const typeCheck = (fileList?: string[], options?: any) => {
   );
   console.error(message);
   console.log(
-    `Found ${allDiagnostics?.length} errors in ${fileList?.length} files.`,
+    `Found ${allDiagnostics?.length} errors in ${fileList?.length} diff files.`,
   );
   if (emitResult.emitSkipped) {
     throw new Error(message);

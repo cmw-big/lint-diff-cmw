@@ -37,30 +37,22 @@ export const typeCheck = (fileList?: string[], options?: any) => {
     .getPreEmitDiagnostics(program)
     .concat(emitResult.diagnostics);
 
-  allDiagnostics.forEach((diagnostic) => {
-    if (diagnostic.file) {
-      const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
-        diagnostic.start!,
-      );
-      const message = ts.flattenDiagnosticMessageText(
-        diagnostic.messageText,
-        '\n',
-      );
-      console.log(
-        `${diagnostic.file.fileName} (${line + 1},${
-          character + 1
-        }): ${message}`,
-      );
-    } else {
-      console.log(
-        ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'),
-      );
-    }
-  });
+  const formatHost: ts.FormatDiagnosticsHost = {
+    getCanonicalFileName: (path) => path,
+    getCurrentDirectory: ts.sys.getCurrentDirectory,
+    getNewLine: () => ts.sys.newLine,
+  };
+  const message = ts.formatDiagnosticsWithColorAndContext(
+    allDiagnostics,
+    formatHost,
+  );
+  console.error(message);
+  console.log(`Found ${allDiagnostics?.length} errors in ${fileList?.length} files.`);
   if (emitResult.emitSkipped) {
-    throw new Error('TypeScript compilation failed');
+    throw new Error(message);
+  } else if (allDiagnostics.length > 0) {
+    process.exit(1);
+  } else {
+    console.log('TypeScript compilation successful!');
   }
-  let exitCode = emitResult.emitSkipped ? 1 : 0;
-  console.log(`Process exiting with code '${exitCode}'.`);
-  process.exit(exitCode);
 };

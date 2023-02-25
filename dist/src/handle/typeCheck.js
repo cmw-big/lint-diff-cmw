@@ -38,22 +38,23 @@ const typeCheck = (fileList, options) => {
     const allDiagnostics = typescript_1.default
         .getPreEmitDiagnostics(program)
         .concat(emitResult.diagnostics);
-    allDiagnostics.forEach((diagnostic) => {
-        if (diagnostic.file) {
-            const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
-            const message = typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-            console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-        }
-        else {
-            console.log(typescript_1.default.flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
-        }
-    });
+    const formatHost = {
+        getCanonicalFileName: (path) => path,
+        getCurrentDirectory: typescript_1.default.sys.getCurrentDirectory,
+        getNewLine: () => typescript_1.default.sys.newLine,
+    };
+    const message = typescript_1.default.formatDiagnosticsWithColorAndContext(allDiagnostics, formatHost);
+    console.error(message);
+    console.log(`Found ${allDiagnostics?.length} errors in ${fileList?.length} files.`);
     if (emitResult.emitSkipped) {
-        throw new Error('TypeScript compilation failed');
+        throw new Error(message);
     }
-    let exitCode = emitResult.emitSkipped ? 1 : 0;
-    console.log(`Process exiting with code '${exitCode}'.`);
-    process.exit(exitCode);
+    else if (allDiagnostics.length > 0) {
+        process.exit(1);
+    }
+    else {
+        console.log('TypeScript compilation successful!');
+    }
 };
 exports.typeCheck = typeCheck;
 //# sourceMappingURL=typeCheck.js.map

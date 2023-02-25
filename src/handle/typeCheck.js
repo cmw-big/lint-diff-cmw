@@ -54,26 +54,27 @@ var typeCheck = function (fileList, options) {
     });
     // 创建输出结果
     var emitResult = program.emit();
-    console.log(emitResult, fileList, 'result');
     // 表示是否有错误发生，没有生成js代码
     var allDiagnostics = typescript_1["default"]
         .getPreEmitDiagnostics(program)
         .concat(emitResult.diagnostics);
-    allDiagnostics.forEach(function (diagnostic) {
-        if (diagnostic.file) {
-            var _a = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start), line = _a.line, character = _a.character;
-            var message = typescript_1["default"].flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-            console.log("".concat(diagnostic.file.fileName, " (").concat(line + 1, ",").concat(character + 1, "): ").concat(message));
-        }
-        else {
-            console.log(typescript_1["default"].flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
-        }
-    });
+    var formatHost = {
+        getCanonicalFileName: function (path) { return path; },
+        getCurrentDirectory: typescript_1["default"].sys.getCurrentDirectory,
+        getNewLine: function () { return typescript_1["default"].sys.newLine; }
+    };
+    var message = typescript_1["default"].formatDiagnosticsWithColorAndContext(allDiagnostics, formatHost);
+    console.error(message);
+    // console.log(`Found ${allDiagnostics?.length} errors in ${fileList?.length} files.\n\n${message}`);
     if (emitResult.emitSkipped) {
-        throw new Error("TypeScript compilation failed");
+        throw new Error(message);
     }
-    var exitCode = emitResult.emitSkipped ? 1 : 0;
-    console.log("Process exiting with code '".concat(exitCode, "'."));
-    process.exit(exitCode);
+    else if (allDiagnostics.length > 0) {
+        console.error(message);
+        process.exit(1);
+    }
+    else {
+        console.log('TypeScript compilation successful!');
+    }
 };
 exports.typeCheck = typeCheck;

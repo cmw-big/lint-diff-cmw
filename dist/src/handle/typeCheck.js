@@ -34,6 +34,7 @@ const typeCheck = (fileList, options) => {
     });
     // 创建输出结果
     const emitResult = program.emit();
+    console.log(emitResult, 'result');
     // 表示是否有错误发生，没有生成js代码
     if (emitResult.emitSkipped) {
         const allDiagnostics = typescript_1.default

@@ -20,9 +20,7 @@ const typeCheck = (fileList, options) => {
     }
     const jsonTsconfig = JSON.parse((0, strip_json_comments_1.default)(tsconfig));
     // 将tsconfig转化为createProgram需要的
-    const { options: programOptions, errors } = typescript_1.default.convertCompilerOptionsFromJson({ ...(jsonTsconfig.compilerOptions ?? {}), noEmit: true } || {
-        noEmit: true,
-    }, process.cwd());
+    const { options: programOptions, errors } = typescript_1.default.convertCompilerOptionsFromJson(jsonTsconfig.compilerOptions || {}, process.cwd());
     if (errors.length) {
         console.error("Error: Couldn't parse compiler options");
         console.error(errors);

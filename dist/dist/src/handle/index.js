@@ -15,5 +15,4 @@ function handleTS(options) {
     (0, typeCheck_1.typeCheck)((0, diffAllFileList_1.diffAllFileList)(branchName, ['.ts', '.js', '.tsx', '.jsx']));
 }
 exports.handleTS = handleTS;
-// const a:number = ""
 //# sourceMappingURL=index.js.map
